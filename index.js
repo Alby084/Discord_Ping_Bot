@@ -6,8 +6,8 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBit
 
 client.on("ready", () => {
     console.log("Bot is online!");
-
-    client.user.setActivity(`Ping Pong`, { type: "WATCHING" });
+    
+    client.user.setActivity('For !ping', { type: 'WATCHING' })
 
 })
 
@@ -27,49 +27,51 @@ client.on("messageCreate", (message) => {
 
 //Test command
 
-if (command === 'test') {
-    message.channel.send("Bot is working!")
-}
-
 if (command === 'reply') {
     message.reply("Im replying to you!")
 }
 
-if (command === 'ping') {
+if (command === 'test') {
+    message.channel.send("Bot is working!")
     message.channel.send(`Bot ping is ${client.ws.ping} ms <@${message.author.id}>`)
 }
 
 if (command === 'say') {
-    let saymsg = message.content
     message.channel.send(saymsg.replace("!say",""))
     //message.delete(1)
 }
 
-if (command === 'ping10') {
-    i = 1
-    let saymsg = message.content
-    while (i < 11) {
-        message.channel.send(saymsg.replace("!ping10","" + i))
-        i++
-    }
+if (command === "ping") {
+    if (message.author.id === 'OWNER_USER_ID')  {
+        interval = setInterval (function () {
+            var saymsg = message.content
+            // use the message's channel (TextChannel) to send a new message
+            message.channel.send(saymsg.replace("!ping",""))
+            .catch(console.error); // add error handling here
+        }, 1 * 1500);
+        //only executes if the author is you
+        } else {
+            message.reply("No I dont think i will")
+        //only executes if the author is not you
+        } 
 }
 
-if (command === 'ping20') {
-    i = 1
-    let saymsg = message.content
-    while (i > 0) {
-        message.channel.send(saymsg.replace("!ping20","" + i))
-        i++
-        if (command === 'stop20')
-        i = 25
-    }
+if (command === "stop") {
+    if (message.author.id === 'OWNER_USER_ID') {
+        message.reply("Stopping!")
+        clearInterval(interval)
+        } else {
+            message.reply("No")
+
+        }
 }
 
-
-
-
-
-
+// --- This doesnt work sadge ---
+//if (command === 'stop') {
+//    message.channel.send("Stopping")
+//    client.destroy();           // Stops the Bot
+//    client.login("MTA0NjM0MDk1Nzk2MTk4NjA4OA.GZ-52x.zgu5Rgb61HyqRaUl9u88IiztIzsZvUKsfTD5B8");   //restarts bot
+//}
 
 })
 
