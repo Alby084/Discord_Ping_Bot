@@ -70,7 +70,7 @@ if (command === "stop") {
 //if (command === 'stop') {
 //    message.channel.send("Stopping")
 //    client.destroy();           // Stops the Bot
-//    client.login("MTA0NjM0MDk1Nzk2MTk4NjA4OA.GZ-52x.zgu5Rgb61HyqRaUl9u88IiztIzsZvUKsfTD5B8");   //restarts bot
+//    client.login("BOT_TOKEN");   //restarts bot
 //}
 
 })
