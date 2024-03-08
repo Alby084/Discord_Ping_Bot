@@ -33,25 +33,19 @@ async def say(ctx, *, message):
 
 @client.command()
 async def ping(ctx):
-    if ctx.author.id == 'STR-UID-HERE':
-        @tasks.loop(seconds=1.5)
-        async def ping_loop(message):
-            await message.channel.send(message.content.replace("!ping", ""))
+    async def ping_loop():
+        await ctx.send(ctx.message.content.replace("!ping", ""))
 
-        ping_loop.start(ctx.message)
-        ping_loops.append(ping_loop)
-    else:
-        await ctx.reply("No I don't think I will")
+    ping_loop_task = tasks.loop(seconds=1.5)(ping_loop)
+    ping_loop_task.start()
+    ping_loops.append(ping_loop_task)
 
 
 @client.command()
 async def stop(ctx):
-    if ctx.author.id == 'STR-UID-HERE':
-        await ctx.reply("Stopping!")
-        for loop in ping_loops:
-            loop.cancel()
-        ping_loops.clear()
-    else:
-        await ctx.reply("No")
+    for loop in ping_loops:
+        loop.cancel()
+    ping_loops.clear()
+    await ctx.reply("Stopped.")
 
-client.run("BOT-TOKEN")
+client.run("MTA0NjM0MDk1Nzk2MTk4NjA4OA.GwBPEp.apfoWlfJdABWRyRL3dF47MhxFi4LPQ5dmBogoM")
