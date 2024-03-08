@@ -1,5 +1,0 @@
-node_modules file is needed.
-download/place into bot folder
-
---- This tutorial can help you out with setting up this bot or coding your own discord bot ---
-https://www.youtube.com/watch?v=qVyqqtwkb8c
