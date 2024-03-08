@@ -48,4 +48,4 @@ async def stop(ctx):
     ping_loops.clear()
     await ctx.reply("Stopped.")
 
-client.run("MTA0NjM0MDk1Nzk2MTk4NjA4OA.GwBPEp.apfoWlfJdABWRyRL3dF47MhxFi4LPQ5dmBogoM")
+client.run("BOT-TOKEN")
